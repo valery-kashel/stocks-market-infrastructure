@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  labels:
+    app: {{ .Release.Name }}-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-deployment
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-deployment
+    spec:
+      containers:
+        - name: stocks-market-backend
+          image: null116/stocks-market-backend:inmemorylatest
+          ports:
+            - containerPort: 8080
