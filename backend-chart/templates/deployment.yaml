@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: stocks-market-backend
-          image: null116/stocks-market-backend:inmemorylatest
+          image: null116/stocks-market-backend:{{ .Values.imageVersion }}}
           ports:
             - containerPort: 8080

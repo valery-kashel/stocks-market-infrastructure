@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stocks-market
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: default
+  source:
+    path: "backend-chart"
+    repoURL: "git@github.com:valery-kashel/stocks-market-infrastructure.git"
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
